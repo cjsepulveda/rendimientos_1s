@@ -26,6 +26,7 @@ trace1 = go.Bar(x=pv.index, y=pv[('Quantity', 'declinada')], name='Declinada')
 # trace4 = go.Bar(x=pv.index, y=pv[('Quantity', 'ganada')], name='Ganada')
 
 app = dash.Dash()
+server=app.server
 
 app.layout = html.Div(children=[
     html.H1(children='Reporte 1° Medios Año 2024'),
