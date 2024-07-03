@@ -1,13 +1,21 @@
+import pathlib
 import dash
 from dash import dcc
 from dash import html
 import plotly.graph_objs as go
 import pandas as pd
 
-file_name = "./src/experimento.xlsx" # Give Any Name / Existing Name
+
+PATH = pathlib.Path(__file__).parent
+DATA_PATH = PATH.joinpath("data").resolve()
+dfe = pd.read_excel(DATA_PATH.joinpath('experimento.xlsx'), sheet_name='Hoja1')
 
 
-dfe = pd.read_excel(file_name, usecols=None, sheet_name='Hoja1') 
+
+# file_name = "./src/experimento.xlsx" # Give Any Name / Existing Name
+
+
+# dfe = pd.read_excel(file_name, usecols=None, sheet_name='Hoja1') 
 
 
 trace5 = go.Bar(x=dfe.CURSO, y=dfe.Promovidos)
