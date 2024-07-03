@@ -4,7 +4,7 @@ from dash import html
 import plotly.graph_objs as go
 import pandas as pd
 
-file_name = "experimento.xlsx" # Give Any Name / Existing Name
+file_name = "./src/experimento.xlsx" # Give Any Name / Existing Name
 
 
 dfe = pd.read_excel(file_name, usecols=None, sheet_name='Hoja1') 
@@ -15,7 +15,7 @@ trace5 = go.Bar(x=dfe.CURSO, y=dfe.Promovidos)
 
 
 ## Importar la data
-df = pd.read_csv('data.csv', delimiter = ';')
+df = pd.read_csv('./src/data.csv', delimiter = ';')
 
 #Crear una tabla dinámica
 pv = pd.pivot_table(df, index=['Name'], columns=["Status"], values=['Quantity'], aggfunc="sum", fill_value=0)
