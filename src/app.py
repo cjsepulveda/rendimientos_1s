@@ -23,12 +23,12 @@ trace5 = go.Bar(x=dfe.CURSO, y=dfe.Promovidos)
 
 
 ## Importar la data
-df = pd.read_csv('./src/data.csv', delimiter = ';')
+# df = pd.read_csv('./src/data.csv', delimiter = ';')
 
 #Crear una tabla dinámica
-pv = pd.pivot_table(df, index=['Name'], columns=["Status"], values=['Quantity'], aggfunc="sum", fill_value=0)
+# pv = pd.pivot_table(df, index=['Name'], columns=["Status"], values=['Quantity'], aggfunc="sum", fill_value=0)
 
-trace1 = go.Bar(x=pv.index, y=pv[('Quantity', 'declinada')], name='Declinada')
+# trace1 = go.Bar(x=pv.index, y=pv[('Quantity', 'declinada')], name='Declinada')
 # trace2 = go.Bar(x=pv.index, y=pv[('Quantity', 'pendiente')], name='Pendiente')
 # trace3 = go.Bar(x=pv.index, y=pv[('Quantity', 'presentada')], name='Presentada')
 # trace4 = go.Bar(x=pv.index, y=pv[('Quantity', 'ganada')], name='Ganada')
