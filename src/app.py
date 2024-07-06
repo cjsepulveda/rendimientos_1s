@@ -90,6 +90,7 @@ className="wrapper",
 ),
     ])
 
+# callback para cambiar lista depegable segun nivel
 @app.callback(
     Output('subject', 'options'),
     Output('subject', 'value'),
@@ -105,7 +106,7 @@ def set_subject_options(selected_level):
 
     return options_level, options_value
 
-
+# callback para filtrar gráfico segun nivel y asignatura
 @app.callback(
         Output('grafica', 'figure'),
         Input('level', 'value'),
