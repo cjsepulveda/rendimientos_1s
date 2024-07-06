@@ -6,9 +6,17 @@ import plotly.express as px
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("data").resolve()
 df01 = pd.read_excel(DATA_PATH.joinpath('experimento.xlsx'), sheet_name='Hoja1')
-grades = df01["NIVEL"].sort_values().unique()
-subjets = df01["ASIGNATURA"].sort_values().unique()
 
+grades = df01["NIVEL"].sort_values().unique()
+subjetsALL = df01["ASIGNATURA"].sort_values().unique()
+
+mask01 = df01[df01["NIVEL"]=="1MEDIO"]
+mask02 = df01[df01["NIVEL"]=="2MEDIO"]
+mask03 = df01[df01["NIVEL"]=="3MEDIO"]
+
+subjets1M = mask01["ASIGNATURA"].sort_values().unique()
+subjets2M = mask02["ASIGNATURA"].sort_values().unique()
+subjets3M = mask03["ASIGNATURA"].sort_values().unique()
 
 # print(df01)
 # mask01=df01[df01["NIVEL"]=="1MEDIO"]
@@ -16,6 +24,12 @@ subjets = df01["ASIGNATURA"].sort_values().unique()
 
 app = Dash(__name__)
 server=app.server
+
+all_options = {
+    '1MEDIO': subjets1M,
+    '2MEDIO': subjets2M,
+    '3MEDIO': subjets3M
+}
 
 app.layout = html.Div(
     children=[
@@ -43,8 +57,10 @@ html.Div(
         dcc.Dropdown(
             id='level', 
             options=[ 
-                {"label": nivel, "value": nivel} 
-                for nivel in grades
+                {"label": nivel, "value": nivel}
+                
+                for nivel in all_options.keys()
+                
             ],
             value="1MEDIO",
             clearable=False,
@@ -58,7 +74,8 @@ html.Div(
             id='subject',
             options=[
                 {"label": asignatura, "value": asignatura}
-                for asignatura in subjets
+                                
+                for asignatura in all_options['1MEDIO']
             ],
             value="LENGUAJE",
             clearable=False,
