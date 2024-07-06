@@ -8,7 +8,7 @@ body {
 
 .header {
     background-color: #222222;
-    height: 200px;
+    height: 150px;
     padding: 16px 0 0 0;
 }
 
@@ -20,7 +20,7 @@ body {
 
 .header-title {
     color: #FFFFFF;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: bold;
     text-align: center;
     margin: 0 auto;
@@ -48,11 +48,11 @@ body {
 }
 
 .menu {
-    height: 112px;
-    width: 912px;
+    height: 100px;
+    width: 700px;
     display: flex;
     justify-content: space-evenly;
-    padding-top: 24px;
+    padding-top: 16px;
     margin: -80px auto 0 auto;
     background-color: #FFFFFF;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
@@ -74,6 +74,12 @@ body {
 
 .menu-title {
     margin-bottom: 6px;
+    font-size: 16px;
     font-weight: bold;
     color: #079A82;
+}
+
+.dropdown {
+    font-size: 16px;
+    
 }
