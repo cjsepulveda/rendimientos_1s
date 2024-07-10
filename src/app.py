@@ -68,12 +68,6 @@ html.Div(
         html.Div(children="ASIGNATURA", className="menu-title"),
         dcc.Dropdown(
             id='subject',
-           # options=[
-            #    {"label": asignatura, "value": asignatura}
-                                
-             #   for asignatura in all_options['1MEDIO']
-            #],
-            # value="LENGUAJE",
             clearable=False,
             className='dropdown',
                 ),
