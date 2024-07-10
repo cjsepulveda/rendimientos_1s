@@ -124,7 +124,7 @@ def update_charts(nivel,asignatura):
                      width=1200, height=400,
                      labels={'value':'Porcentaje estudiantes','variable':'Categorías','CURSO':'Cursos'},
                      barmode='group',
-                     color_discrete_map={'MB':'blue','B':'green','S':'orange','I':'tomato','P':'gold'},
+                     color_discrete_map={'MB':'blue','B':'green','S':'orange','I':'tomato','P':'darkred'},
                      template="simple_white",
                      text_auto='.0%',
                      range_y=[0,1],
