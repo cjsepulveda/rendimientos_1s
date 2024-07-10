@@ -117,7 +117,7 @@ def update_charts(nivel,asignatura):
         "NIVEL == @nivel and ASIGNATURA == @asignatura")
         
     trace01 = px.bar(select_nivel_subject, x='CURSO', y=['MB','B','S','I','P'],
-                     title= 'Rendimientos estudiantes',
+                     title= f'Rendimientos estudiantes {asignatura}',
                      width=1200, height=400,
                      labels={'value':'Porcentaje estudiantes','variable':'Categorías','CURSO':'Cursos'},
                      barmode='group',
