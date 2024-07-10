@@ -34,9 +34,10 @@ all_options = {
     '4MEDIO': subjets4M
 }
 
+# Diagrama de la aplicación (Dos listas despegables y un gráfico)
 app.layout = html.Div(
     children=[
-
+# Título de la aplicación
 html.Div(
             children=[
                 html.H1(
@@ -45,8 +46,9 @@ html.Div(
             className="header",
         ),
 
-
+# Marco para las dos listas despegables
 html.Div(children=[
+# Lista despegable de NIVELES, segun nivel
 html.Div(
     children=[
         html.Div(children='NIVEL', className='menu-title'),
@@ -63,6 +65,7 @@ html.Div(
             className='dropdown'
         ),
     ]),
+# Lista despegable de Asignaturas, segun nivel
 html.Div(
     children=[
         html.Div(children="ASIGNATURA", className="menu-title"),
@@ -76,7 +79,7 @@ html.Div(
 ],
 className="menu",
 ),
-
+# marco para el gráfico
 html.Div(children=[
     dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
 ],
@@ -107,7 +110,7 @@ def set_subject_options(selected_level):
         Input('subject','value')
         )
 
-# función para grafico segun nivel y asignatura
+# función para trazar grafico segun nivel y asignatura
 def update_charts(nivel,asignatura):
 
     select_nivel_subject = df01.query(
@@ -136,6 +139,6 @@ def update_charts(nivel,asignatura):
     
     return trace01
 
-
+# cargar en servidor
 if __name__ == '__main__':
     app.run_server(debug=True)
