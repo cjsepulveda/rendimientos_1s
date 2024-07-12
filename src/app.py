@@ -22,18 +22,18 @@ mask06 = df01[df01['AREA']=='CARRERAS']
 mask07 = df01[df01['AREA']=='PROFUNDIZACIÓN HC']
 
 
-# Lista de asignaturas según nivel
+# Listas de asignaturas según nivel
 subjets1M = mask01["ASIGNATURA"].unique()
 subjets2M = mask02["ASIGNATURA"].unique()
 subjets3M = mask03["ASIGNATURA"].unique()
 subjets4M = mask04["ASIGNATURA"].unique()
 
-# Lista de asignaturas según área
+# Listas de asignaturas según área
 subjets_plancomun = mask05["ASIGNATURA"].unique()
 subjets_carreras = mask06['TIPO'].unique()
 subjets_profundizacion = mask07['TIPO'].unique()
 
-# diccionario con listas de asignaturas segun nivel
+# Diccionario con listas de asignaturas segun nivel
 all_options = {
     '1MEDIO': subjets1M,
     '2MEDIO': subjets2M,
@@ -41,17 +41,18 @@ all_options = {
     '4MEDIO': subjets4M
 }
 
-# diccionario con listas de asignaturas por área para 3MEDIO y 4MEDIO
+# Diccionario con listas de asignaturas por área para 3MEDIO y 4MEDIO
 options_area = {
     'PLAN COMÚN':subjets_plancomun,
     'CARRERAS':subjets_carreras,
     'PROFUNDIZACIÓN HC': subjets_profundizacion
 }
 
+# Inicio aplicacion Dash
 app = Dash(__name__)
 server=app.server
 
-# Diagrama de la aplicación (Dos listas despegables y un gráfico)
+# Diagrama de la aplicación (Título, Tres listas despegables y un gráfico)
 app.layout = html.Div(
     children=[
 # Título de la aplicación
@@ -63,7 +64,7 @@ html.Div(
             className="header",
         ),
 
-# Marco para las dos listas despegables
+# Marco para tres listas despegables NIVEL, AREA, ASIGNATURA
 html.Div(children=[
 # Lista despegable de NIVELES, segun nivel
 html.Div(
@@ -116,6 +117,7 @@ html.Div(
 ],
 className="menu",
 ),
+
 # Marco para el gráfico
 html.Div(children=[
     dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
@@ -130,14 +132,25 @@ className="wrapper",
     Output('subject', 'options'),
     Output('subject', 'value'),
     Output('area','disabled'),
+    Output('area','value'),
     [Input('level', 'value'),
      Input('area','value')]
         
     )
+
 # función para cambiar opciones de lista despegable asignaturas segun el nivel y valor inicial
 def set_subject_options(selected_level, selected_area):
 
-    if selected_level == '1MEDIO' or selected_level == '2MEDIO' : 
+    if (selected_level=='2MEDIO' or selected_level=='1MEDIO') and (
+        selected_area=='CARRERAS' or selected_area=='PROFUNDIZACIÓN HC'):
+
+        value_area_ini ='PLAN COMÚN'
+    
+    else:
+
+        value_area_ini = selected_area
+
+    if selected_level == '1MEDIO' or selected_level == '2MEDIO': 
         
         options_disabled_area = True
         
@@ -146,6 +159,7 @@ def set_subject_options(selected_level, selected_area):
     
         value_subject_ini = all_options[selected_level][0]
 
+                  
         
     elif selected_level == '3MEDIO' or selected_level == '4MEDIO' :
         
@@ -156,8 +170,9 @@ def set_subject_options(selected_level, selected_area):
     
         value_subject_ini = options_area[selected_area][0]
        
+        
 
-    return options_subjects, value_subject_ini, options_disabled_area
+    return options_subjects, value_subject_ini, options_disabled_area, value_area_ini
 
 # callback para filtrar gráfico segun nivel y asignatura
 @app.callback(
@@ -178,12 +193,10 @@ def update_charts(nivel,asignatura,area_id):
         select_nivel_subject = df01.query("AREA == @area_id and TIPO == @asignatura")
         graph_x_axes = 'ASIGNATURA'
 
-  
-
     trace01 = px.bar(select_nivel_subject, x=graph_x_axes, y=['MB','B','S','I','P'],
-                     title= f'Rendimientos estudiantes {asignatura}',
-                     width=1200, height=400,
-                     labels={'value':'Porcentaje estudiantes','variable':'Categorías','CURSO':'Cursos'},
+                     title= f'RENDIMIENTO ESTUDIANTES en {asignatura}',
+                     width=1200, height=600,
+                     labels={'value':'','variable':'Categorías','CURSO':'Cursos'},
                      barmode='group',
                      color_discrete_map={'MB':'blue','B':'green','S':'orange','I':'tomato','P':'darkred'},
                      template="simple_white",
@@ -191,14 +204,18 @@ def update_charts(nivel,asignatura,area_id):
                      range_y=[0,1],
                      )
     
-    trace01.update_yaxes(tickformat=".1%", tickfont_weight='bold',title_font_weight='bold')
-    trace01.update_xaxes(tickfont_weight='bold')
+    trace01.update_yaxes(tickformat=".1%", tickfont_weight='bold',title_font_weight='bold',tickfont_size=15)
+    trace01.update_xaxes(tickfont_weight='bold', title_font_weight='bold')
     # trace01.update_traces(textfont_size=12, textangle=0, textposition="inside", cliponaxis=False)
     trace01.update_layout(
                          hoverlabel_font_color='white',
+                         hoverlabel_font_family='Consolas',
                          uniformtext_minsize=5,
                          uniformtext_mode='show',
-                         title_font_weight='bold'
+                         title_font_weight='bold',
+                         font_family='Consolas',
+                         title_font_size=20,
+                         title_x=0.5
                          )
     
     return trace01
