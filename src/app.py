@@ -33,7 +33,7 @@ subjets_plancomun = mask05["ASIGNATURA"].unique()
 subjets_carreras = mask06['TIPO'].unique()
 subjets_profundizacion = mask07['TIPO'].unique()
 
-
+# diccionario con listas de asignaturas segun nivel
 all_options = {
     '1MEDIO': subjets1M,
     '2MEDIO': subjets2M,
@@ -41,14 +41,12 @@ all_options = {
     '4MEDIO': subjets4M
 }
 
+# diccionario con listas de asignaturas por área para 3MEDIO y 4MEDIO
 options_area = {
     'PLAN COMÚN':subjets_plancomun,
     'CARRERAS':subjets_carreras,
     'PROFUNDIZACIÓN HC': subjets_profundizacion
 }
-# print(df01)
-# mask01=df01[df01["NIVEL"]=="1MEDIO"]
-# print(mask01)
 
 app = Dash(__name__)
 server=app.server
@@ -118,7 +116,7 @@ html.Div(
 ],
 className="menu",
 ),
-# marco para el gráfico
+# Marco para el gráfico
 html.Div(children=[
     dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
 ],
