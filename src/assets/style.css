@@ -1,14 +1,14 @@
 /* assets/style.css */
 
 body {
-    font-family: "Lato", sans-serif;
+    font-family: "Consolas", sans-serif;
     margin: 0;
     background-color: #F7F7F7;
 }
 
 .header {
     background-color: #222222;
-    height: 150px;
+    height: 120px;
     padding: 16px 0 0 0;
 }
 
@@ -20,7 +20,7 @@ body {
 
 .header-title {
     color: #FFFFFF;
-    font-size: 40px;
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
     margin: 0 auto;
@@ -48,7 +48,7 @@ body {
 }
 
 .menu {
-    height: 100px;
+    height: 70px;
     width: 1000px;
     display: flex;
     justify-content: space-evenly;
@@ -59,21 +59,27 @@ body {
 }
 
 .Select-control {
-    width: 256px;
-    height: 48px;
+    position: relative;
+    right: 2px;
+    bottom: 5px;
+    width: 296px;
+    height: 20px;
 }
 
-.Select--single>.Select-control .Select-value,
+.Select--single >.Select-control .Select-value,
 .Select-placeholder {
-    line-height: 48px;
+    line-height: 30px;
+    font-weight: bold;
 }
 
 .Select--multi .Select-value-label {
-    line-height: 32px;
+    line-height: 30px;
+
 }
 
 .menu-title {
-    margin-bottom: 6px;
+    position: relative;
+    bottom: 10px;
     font-size: 16px;
     font-weight: bold;
     color: #00249c;
@@ -81,5 +87,6 @@ body {
 
 .dropdown {
     font-size: 16px;
+    
     
 }
