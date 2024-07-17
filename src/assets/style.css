@@ -35,8 +35,8 @@ body {
 
 .wrapper {
     margin-right: auto;
-    margin-left: 100px;
-    max-width: 1024px;
+    margin-left: 92px;
+    max-width: 1080px;
     padding-right: 10px;
     padding-left: 10px;
     margin-top: 32px;
@@ -44,7 +44,7 @@ body {
 
 .card {
     margin-bottom: 24px;
-    margin-left: -80px;
+    margin-left: 80px;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
 }
 
@@ -54,7 +54,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     padding-top: 16px;
-    margin: -80px 335px 0 auto;
+    margin: -80px auto 0 auto;
     background-color: #FFFFFF;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
 }
