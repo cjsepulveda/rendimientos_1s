@@ -55,14 +55,7 @@ server=app.server
 # Diagrama de la aplicación (Título, Tres listas despegables y un gráfico)
 app.layout = html.Div(
     children=[
-# Título de la aplicación
-#html.Div(
- #           children=[
-  #              html.H2(
-   #                 children="Gráficas Rendimientos  2024", className="header-title"
-    #            )],
-      #      className="header",
-     #   ),
+
 
 # Marco para tres listas despegables NIVEL, AREA, ASIGNATURA
 html.Div(children=[
@@ -119,9 +112,9 @@ className="menu",
 ),
 
 # Marco para el gráfico
-html.Div(children=[
-    dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
-],
+html.Div(id='grafico1' , #children=[
+    # dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
+#,
 className="wrapper",
 ),
     ])
@@ -176,7 +169,7 @@ def set_subject_options(selected_level, selected_area):
 
 # callback para filtrar gráfico segun nivel y asignatura
 @app.callback(
-        Output('grafica', 'figure'),
+        Output('grafico1', 'children'),
         [Input('level', 'value'),
         Input('subject','value'),
         Input('area','value')]
@@ -217,8 +210,9 @@ def update_charts(nivel,asignatura,area_id):
                          title_font_size=20,
                          title_x=0.5
                          )
-    
-    return trace01
+    new_trace01 = [dcc.Graph(figure=trace01, config={"displayModeBar": False}, className="card")]
+     # dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
+    return new_trace01
 
 # cargar en servidor
 if __name__ == '__main__':
