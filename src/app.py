@@ -33,7 +33,7 @@ subjets_plancomun = mask05["ASIGNATURA"].unique()
 subjets_carreras = mask06['TIPO'].unique()
 subjets_profundizacion = mask07['TIPO'].unique()
 
-# Diccionario con listas de asignaturas segun nivel
+# Diccionario con listas de asignaturas plan comun segun nivel
 all_options = {
     '1MEDIO': subjets1M,
     '2MEDIO': subjets2M,
@@ -111,12 +111,9 @@ html.Div(
 className="menu",
 ),
 
-# Marco para el gráfico
-html.Div(id='grafico1' , #children=[
-    # dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
-#,
-className="wrapper",
-),
+# Marco para el gráfico (dcc.Graph está incorporado en la función update_charts)
+    html.Div(id='grafico' , className="wrapper"),
+
     ])
 
 # callback para cambiar lista despegable de asignaturas de 1MEDIO o 2MEDIO MEDIO segun nivel 
@@ -169,7 +166,7 @@ def set_subject_options(selected_level, selected_area):
 
 # callback para filtrar gráfico segun nivel y asignatura
 @app.callback(
-        Output('grafico1', 'children'),
+        Output('grafico', 'children'),
         [Input('level', 'value'),
         Input('subject','value'),
         Input('area','value')]
@@ -193,13 +190,11 @@ def update_charts(nivel,asignatura,area_id):
                      barmode='group',
                      color_discrete_map={'MB':'blue','B':'green','S':'orange','I':'tomato','P':'darkred'},
                      template="simple_white",
-                     #text_auto='.0%',
                      range_y=[0,1],
                      )
     
     trace01.update_yaxes(tickformat=".1%", tickfont_weight='bold',title_font_weight='bold',tickfont_size=15)
     trace01.update_xaxes(tickfont_weight='bold', title_font_weight='bold')
-    # trace01.update_traces(textfont_size=12, textangle=0, textposition="inside", cliponaxis=False)
     trace01.update_layout(
                          hoverlabel_font_color='white',
                          hoverlabel_font_family='Consolas',
@@ -211,7 +206,7 @@ def update_charts(nivel,asignatura,area_id):
                          title_x=0.5
                          )
     new_trace01 = [dcc.Graph(figure=trace01, config={"displayModeBar": False}, className="card")]
-     # dcc.Graph( id='grafica', config={"displayModeBar": False}, className="card")
+   
     return new_trace01
 
 # cargar en servidor
