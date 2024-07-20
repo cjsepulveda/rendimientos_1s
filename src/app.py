@@ -10,7 +10,7 @@ df01 = pd.read_excel(DATA_PATH.joinpath('data_level_grade_02.xlsx'), sheet_name=
 grades = df01["NIVEL"].sort_values().unique()
 subjetsALL = df01["ASIGNATURA"].unique()
 
-# Filtro para asiganturas segun nivel
+# Filtro para asiganturas segun nivel elegido
 mask01 = df01[df01["NIVEL"]=="1MEDIO"]
 mask02 = df01[df01["NIVEL"]=="2MEDIO"]
 mask03 = df01[df01["NIVEL"]=="3MEDIO"]
