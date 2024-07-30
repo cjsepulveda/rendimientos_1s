@@ -3,7 +3,7 @@
 body {
     font-family: "Consolas", sans-serif;
     margin: 0;
-    background-color: #F7F7F7;
+    background-color: #ffffff;
 }
 
 .header {
@@ -48,7 +48,7 @@ body {
 
 .card {
     margin-bottom: 24px;
-    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+    /*box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);*/
 }
 
 .menu {
@@ -59,7 +59,7 @@ body {
     padding-top: 16px;
     margin: 0 auto 0 auto;
     background-color: #FFFFFF;
-    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+    /*box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);*/
 }
 
 .Select-control {
