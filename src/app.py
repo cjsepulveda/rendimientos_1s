@@ -185,7 +185,7 @@ def update_charts(nivel,asignatura,area_id):
 
     trace01 = px.bar(select_nivel_subject, x=graph_x_axes, y=['MB','B','S','I','P'],
                      title= f'RENDIMIENTO ESTUDIANTES en {asignatura}',
-                     width=1000, height=380,
+                     width=1024, height=440,
                      labels={'value':'','variable':'Categorías','CURSO':'Cursos'},
                      barmode='group',
                      color_discrete_map={'MB':'blue','B':'green','S':'orange','I':'tomato','P':'darkred'},
