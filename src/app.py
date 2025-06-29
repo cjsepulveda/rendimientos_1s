@@ -211,4 +211,4 @@ def update_charts(nivel,asignatura,area_id):
 
 # cargar en servidor
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)
