@@ -2,6 +2,7 @@ import pathlib
 from dash import Dash, dcc, html, Input, Output
 import pandas as pd
 import plotly.express as px
+from tkinter import messagebox
 
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("data").resolve()
@@ -110,6 +111,15 @@ html.Div(
 ],
 className="menu",
 ),
+# Botones para elegir tipo gráfico
+dcc.RadioItems(
+   id ="expand",
+   options=[
+       {'label': 'Todos los cursos', 'value': 'allgrade'},
+       {'label': 'Promedio Nivel', 'value': 'meanlevel'},
+      ],
+   value='allgrade'
+),
 
 # Marco para el gráfico (dcc.Graph está incorporado en la función update_charts)
     html.Div(id='grafico' , className="wrapper"),
@@ -164,20 +174,28 @@ def set_subject_options(selected_level, selected_area):
 
     return options_subjects, value_subject_ini, options_disabled_area, value_area_ini
 
-# callback para filtrar gráfico segun nivel y asignatura
+# callback para filtrar gráfico segun nivel y asignatura, por separado o promedio
 @app.callback(
         Output('grafico', 'children'),
         [Input('level', 'value'),
         Input('subject','value'),
-        Input('area','value')]
+        Input('area','value'),
+        Input('expand','value')]
         )
 
 # función para trazar grafico segun nivel, área y asignatura
-def update_charts(nivel,asignatura,area_id):
+def update_charts(nivel,asignatura,area_id,expandir):
 
     if  area_id == 'PLAN COMÚN':
-        select_nivel_subject = df01.query("NIVEL == @nivel and ASIGNATURA == @asignatura")
-        graph_x_axes = 'CURSO'
+        if expandir == 'allgrade':
+            select_nivel_subject = df01.query("NIVEL == @nivel and ASIGNATURA == @asignatura")
+            graph_x_axes = 'CURSO'
+
+        elif expandir == "meanlevel":
+             select_nivel_subject_filter= df01.query("NIVEL == @nivel and ASIGNATURA == @asignatura")
+             select_nivel_subject = select_nivel_subject_filter.groupby(['NIVEL','ASIGNATURA']).mean(numeric_only=True).reset_index()
+             graph_x_axes = 'NIVEL'
+
     
     elif area_id == 'CARRERAS' or area_id == 'PROFUNDIZACIÓN HC': 
         select_nivel_subject = df01.query("AREA == @area_id and TIPO == @asignatura")
